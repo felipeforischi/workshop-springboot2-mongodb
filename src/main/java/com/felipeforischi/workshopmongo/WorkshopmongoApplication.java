@@ -1,4 +1,4 @@
-package com.educandoweb.course;
+package com.felipeforischi.workshopmongo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
