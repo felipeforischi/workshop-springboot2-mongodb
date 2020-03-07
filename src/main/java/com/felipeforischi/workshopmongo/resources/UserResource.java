@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.felipeforischi.workshopmongo.domain.Post;
 import com.felipeforischi.workshopmongo.domain.User;
 import com.felipeforischi.workshopmongo.dto.UserDTO;
 import com.felipeforischi.workshopmongo.services.UserService;
@@ -49,7 +50,7 @@ public class UserResource {
 	}
 	
 	@RequestMapping(value = "/{id}", method=RequestMethod.DELETE)
-	//@GetMapping -> pode ser usado no lugar de @RequestMapping(method=RequestMethod.GET)
+	//@DeleteMapping -> pode ser usado no lugar de @RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<Void>  delete(@PathVariable String id){
 		service.delete(id);
 		return ResponseEntity.noContent().build();
@@ -63,4 +64,12 @@ public class UserResource {
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
 	}
+	
+	@RequestMapping(value = "/{id}/posts", method=RequestMethod.GET)
+	//@GetMapping -> pode ser usado no lugar de @RequestMapping(method=RequestMethod.GET)
+	public ResponseEntity<List<Post>>  findPosts(@PathVariable String id){
+		User obj = service.findById(id);
+		return ResponseEntity.ok().body(obj.getPosts());
+	}
+	
 }
